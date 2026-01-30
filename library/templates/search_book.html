@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liboo - Explore All Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='search_book.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="classic-header">
+        <div class="container">
+            <h1 class="logo"><a href="/" class='link'>Liboo</a></h1>
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li><a class='link' href="/">Home</a></li>
+                    <li><a class='link' href="/user_dash/search_book">Books</a></li>
+                    <li><a class='link' href="/user_dash/book_donation">Donate</a></li>
+                    <li><a class='link' href="/aboutus">About</a></li>
+                    <li><a class='link' href="#Contact">Contact</a></li>
+                    {% else %}
+                    <li><a class='link' href="#">Home</a></li>
+                    <li><a class='link' href="/aboutus">About</a></li>
+                    <li><a class='link' href="#Contact">Contact</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Explore All Books Section -->
+    <section class="explore-books-section">
+        <div class="container">
+            <h2>Explore All Books</h2>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search by Title, Author, ISBN" class="search-input">
+                <button class="btn search-button">Search</button>
+            </div>
+
+            <!-- Advanced Filters -->
+            <div class="advanced-filters">
+                <select class="filter-category">
+                    <option value="">Category/Genre</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="tech">Tech</option>
+                    <option value="science">Science</option>
+                    <option value="history">History</option>
+                </select>
+                <input type="text" placeholder="Author (optional)" class="author-input">
+                <input type="text" placeholder="Location (optional)" class="location-input">
+                <select class="filter-availability">
+                    <option value="">Availability</option>
+                    <option value="available">Available</option>
+                    <option value="borrowed">Borrowed</option>
+                </select>
+                <select class="sort-by">
+                    <option value="">Sort By</option>
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="most-borrowed">Most Borrowed</option>
+                    <option value="a-z">A–Z</option>
+                </select>
+            </div>
+
+            <!-- Search Results / Book List -->
+            {% if books %}
+            <div class="book-list">
+                {% for book in books %}
+                <div class="book-card">
+                    <div class="book-cover"><img src="{{ url_for('static', filename='uploads/' ~ book.cover_image) }}" alt="No Cover Page " class="book-cover"></div>
+                    <div class="book-info">
+                        <h3>{{book.book_name|title}}</h3>
+                        <p>Author: {{book.author_name|title}}</p>
+                        <p>Category: {{book.category}}</p>
+                        <p>Status: Available</p>
+                        <a href="{{ url_for('auth.book_details', book_id=book.id) }}"><button class="btn request">Borrow / Request</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- Add more book cards as needed -->
+            </div>
+            {% endif %}
+
+            <!-- No Results Message -->
+            <div class="no-results" style="display: none;">
+                <p>No books found. Try adjusting your search.</p>
+            </div>
+
+            <!-- Pagination / Load More -->
+            <div class="pagination">
+                <button class="btn load-more">Load More</button>
+            </div>
+
+            <!-- Optional Extras -->
+            <div class="optional-extras">
+                <h3>Highlighted / Popular Books</h3>
+                <ul>
+                    <li>Learning React</li>
+                    <li>Data Science from Scratch</li>
+                </ul>
+                <h3>Recently Added Books</h3>
+                <ul>
+                    <li>HTML & CSS: Design and Build Websites</li>
+                    <li>Introduction to Machine Learning</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="classic-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Liboo</h3>
+                    <p>The Open Library for Local Community</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Browse Books</a></li>
+                        <li><a href="#">Donate Books</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>email@liboo.com</p>
+                    <p>+123 456 7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Liboo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

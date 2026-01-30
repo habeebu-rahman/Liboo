@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Liboo - Donate a Book</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='book_donate.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <!-- Header -->
+  <header class="classic-header">
+    <div class="container">
+        <h1 class="logo"><a href="/" class='link'>Liboo</a></h1>
+      <nav>
+        <ul>
+          {% if user.is_authenticated %}
+                    <li><a class='link' href="/">Home</a></li>
+                    <li><a class='link' href="/user_dash/search_book">Books</a></li>
+                    <li><a class='link' href="/user_dash/book_donation">Donate</a></li>
+                    <li><a class='link' href="/aboutus">About</a></li>
+                    <li><a class='link' href="#Contact">Contact</a></li>
+                    {% else %}
+                    <li><a class='link' href="#">Home</a></li>
+                    <li><a class='link' href="/aboutus">About</a></li>
+                    <li><a class='link' href="#Contact">Contact</a></li>
+                    {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Donation Section -->
+  <section class="donation-section">
+    <div class="container">
+      <h2>Donate a Book</h2>
+
+      <form id="donation-form" class="donation-form" action="{{ url_for('auth.book_donation') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="title">Book Title <span class="required">*</span></label>
+          <input type="text" id="title" name="title" placeholder="Enter book title" required >
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author <span class="required">*</span></label>
+          <input type="text" id="author" name="author" placeholder="Enter author name" required >
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category/Genre <span class="required">*</span></label>
+          <select id="category" name="category" required>
+            <option value="" disabled selected>Select category</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Tech">Tech</option>
+            <option value="Science">Science</option>
+            <option value="History">History</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="publishedYear">Published Year / Edition (optional)</label>
+          <input type="number" id="publishedYear" name="publishedYear" min="1000" max="2099" placeholder="e.g. 2020" />
+        </div>
+
+        <div class="form-group">
+          <label for="publisher">Publisher (optional)</label>
+          <input type="text" id="publisher" name="publisher" placeholder="Enter publisher name" />
+        </div>
+
+        <div class="form-group">
+          <label for="coverImage">Upload Cover Image</label>
+          <input type="file" id="coverImage" name="coverImage" accept="image/*" />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Short Description / Summary</label>
+          <textarea id="description" name="description" rows="4" placeholder="Write a brief summary under 200 words"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location (city/pincode, optional)<span class="required">*</span></label>
+          <input type="text" id="location" name="location" placeholder="City or pincode" />
+        </div>
+
+        <div class="form-buttons">
+          <button type="submit" class="btn primary">Donate Book</button>
+          <button type="reset" class="btn secondary">Clear </button>
+        </div>
+      </form>
+
+
+      <div id="confirmation-message" class="confirmation-message" style="display:none;">
+        Thank you for donating! Your book is now listed in the library.
+      </div>
+
+      <div class="preview-section">
+        <h3>Preview of Your Donated Book</h3>
+        <div class="book-card preview-card">
+          <div class="book-cover" id="preview-cover"></div>
+          <div class="book-info">
+            <h4 id="preview-title">Book Title</h4>
+            <p id="preview-author">Author</p>
+            <p id="preview-category">Category</p>
+            <p id="preview-description">Short description will appear here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="classic-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Liboo</h3>
+          <p>The Open Library for Local Community</p>
+        </div>
+        <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a class='link' href="/">Home</a></li>
+                        <li><a class='link' href="/user_dash/search_book">Browse Books</a></li>
+                        <li><a class='link' href="/user_dash/book_donation">Donate Books</a></li>
+                        <li><a class='link' href="/aboutus">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact <a name='Contact'></a></h3>
+                    <p><a class='link' href="mailto:email@liboo.com">email@liboo.com</a></p>
+                    <p><a class='link' href="tel:+123 456 7890">+123 456 7890</a></p>
+                </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Liboo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+    const form = document.getElementById('donation-form');
+    const confirmationMessage = document.getElementById('confirmation-message');
+
+    const previewTitle = document.getElementById('preview-title');
+    const previewAuthor = document.getElementById('preview-author');
+    const previewCategory = document.getElementById('preview-category');
+    const previewDescription = document.getElementById('preview-description');
+    const previewCover = document.getElementById('preview-cover');
+
+    form.title.addEventListener('input', e => {
+      previewTitle.textContent = e.target.value || 'Book Title';
+    });
+
+    form.author.addEventListener('input', e => {
+      previewAuthor.textContent = e.target.value ? `Author: ${e.target.value}` : 'Author';
+    });
+
+    form.category.addEventListener('change', e => {
+      previewCategory.textContent = e.target.value ? `Category: ${e.target.value}` : 'Category';
+    });
+
+    form.description.addEventListener('input', e => {
+      previewDescription.textContent = e.target.value || 'Short description will appear here.';
+    });
+
+    form.coverImage.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = event => {
+          previewCover.style.backgroundImage = `url(${event.target.result})`;
+          previewCover.style.backgroundSize = 'cover';
+          previewCover.style.backgroundPosition = 'center';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewCover.style.backgroundImage = 'none';
+      }
+    });
+
+    form.addEventListener('submit', e => {
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      confirmationMessage.style.display = 'block';
+      //form.reset();
+      previewTitle.textContent = 'Book Title';
+      previewAuthor.textContent = 'Author';
+      previewCategory.textContent = 'Category';
+      previewDescription.textContent = 'Short description will appear here.';
+      previewCover.style.backgroundImage = 'none';
+    });
+
+    form.addEventListener('reset', () => {
+      confirmationMessage.style.display = 'none';
+      previewTitle.textContent = 'Book Title';
+      previewAuthor.textContent = 'Author';
+      previewCategory.textContent = 'Category';
+      previewDescription.textContent = 'Short description will appear here.';
+      previewCover.style.backgroundImage = 'none';
+    });
+  </script>
+</body>
+</html>

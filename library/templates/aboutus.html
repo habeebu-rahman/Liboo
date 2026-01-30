@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Liboo - About Us</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='home1.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet"
+/>
+</head>
+<body>
+<!-- Header -->
+<header class="classic-header">
+    <div class="container">
+    <h1 class="logo"><a href="/" class='link'>Liboo</a></h1>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/user_dash/search_book">Books</a></li>
+                    <li><a href="/user_dash/book_donation">Donate</a></li>
+                    <li><a href="/aboutus">About</a></li>
+                    <li><a href="#Contact">Contact</a></li>
+                    {% else %}
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/aboutus">About</a></li>
+                    <li><a href="#Contact">Contact</a></li>
+                    {% endif %}
+        </ul>
+    </nav>
+    </div>
+</header>
+
+<!-- About Section -->
+<section class="about-section">
+    <div class="container">
+        <h2>About Liboo</h2><br>
+        <p class="intro">
+        Welcome to Liboo, the Open Library for Local Community. Our platform connects book lovers in your neighborhood, making it easy to share, donate, borrow, and lend books. We're building a community where knowledge flows freely, fostering connections and lifelong learning.
+        </p><br>
+
+        
+        <div class="section">
+            <h3>Our Mission</h3><br>
+            <p>
+            To create a sustainable, community-driven library system that promotes access to books for everyone, regardless of location or budget. We believe in the power of stories to inspire, educate, and unite people.
+            </p><br>
+        </div>
+
+        <div class="section">
+            <h3>Our Vision</h3><br>
+            <p>
+            A world where every community has a thriving library of shared knowledge, where books are not just owned but experienced collectively. Liboo aims to reduce waste, encourage reading, and build stronger local bonds.
+            </p><br>
+        </div>
+
+        <div class="section">
+            <h3>How It Works</h3><br>
+            <ul style='list-style-type: none'>
+                <li><strong>Register:</strong> Create a free account to join our community.</li>
+                <li><strong>Donate:</strong> Share books from your collection with others.</li>
+                <li><strong>Borrow:</strong> Discover and borrow books available in your area.</li>
+                <li><strong>Return:</strong> Share the joy by returning books for others to enjoy.</li>
+            </ul><br>
+        </div>
+
+        <div class="section">
+            <h3>Our Team</h3><br>
+            <p>
+                Liboo was founded by a group of passionate readers and tech enthusiasts who saw the need for a modern, local library system. Our team includes developers, designers, and community advocates dedicated to making Liboo a success.
+            </p><br>
+            <p>
+                <em>Join us in building a better world, one book at a time.</em>
+            </p>
+        </div>
+    </div>
+    </div>
+    </section>
+
+  <!-- Footer -->
+  <footer class="classic-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Liboo</h3>
+          <p>The Open Library for Local Community</p>
+        </div>
+        <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/user_dash/search_book">Browse Books</a></li>
+                        <li><a href="/user_dash/book_donation">Donate Books</a></li>
+                        <li><a href="/aboutus">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact<a name="Contact"></a></h3>
+                    <p><a href="mailto:email@liboo.com">email@liboo.com</a></p>
+                    <p><a href="tel:+123 456 7890">+123 456 7890</a></p>
+                </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Liboo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

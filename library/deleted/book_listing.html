@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liboo - Available Books</title>
+    <link rel="stylesheet" href="book_listing.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="classic-header">
+        <div class="container">
+            <h1 class="logo">Liboo</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Book Listing Section -->
+    <section class="book-listing-section">
+        <div class="container">
+            <h2>Available Books</h2>
+
+            <!-- Search & Filter Section -->
+            <div class="search-filter">
+                <input type="text" placeholder="🔍 Search by title or author" class="search-bar">
+                <div class="filter-options">
+                    <select class="filter-category">
+                        <option value="">Category/Genre</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="non-fiction">Non-Fiction</option>
+                        <option value="science">Science</option>
+                        <option value="history">History</option>
+                    </select>
+                    <select class="filter-availability">
+                        <option value="">Availability</option>
+                        <option value="available">Available</option>
+                        <option value="borrowed">Borrowed</option>
+                    </select>
+                    <input type="text" placeholder="Location (optional)" class="location-input">
+                </div>
+            </div>
+
+            <!-- Book Cards -->
+            <div class="book-cards">
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-info">
+                        <h3>Python Basics</h3>
+                        <p>Author: John Doe</p>
+                        <p>Genre: Programming</p>
+                        <p>Donor: Jane Smith</p>
+                        <p>Status: Available</p>
+                        <p>Date Added: 2023-01-15</p>
+                        <button class="btn view-details">View Details</button>
+                        <button class="btn request" onclick="requestBook()">Request / Borrow Book</button>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-info">
+                        <h3>JavaScript Essentials</h3>
+                        <p>Author: Alice Johnson</p>
+                        <p>Genre: Programming</p>
+                        <p>Donor: Mark Brown</p>
+                        <p>Status: Borrowed</p>
+                        <p>Date Added: 2023-02-10</p>
+                        <button class="btn view-details">View Details</button>
+                        <button class="btn disabled" disabled>Borrowed</button>
+                    </div>
+                </div>
+                <!-- Add more book cards as needed -->
+            </div>
+
+            <!-- Pagination / Load More -->
+            <div class="pagination">
+                <button class="btn load-more">Load More</button>
+            </div>
+
+            <!-- Optional Sidebar -->
+            <aside class="sidebar">
+                <h3>Top Donors</h3>
+                <ul>
+                    <li>Jane Smith - 10 books</li>
+                    <li>Mark Brown - 8 books</li>
+                    <li>Alice Johnson - 5 books</li>
+                </ul>
+                <h3>Recently Added Books</h3>
+                <ul>
+                    <li>HTML & CSS: Design and Build Websites</li>
+                    <li>Learning React</li>
+                    <li>Data Science from Scratch</li>
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="classic-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Liboo</h3>
+                    <p>The Open Library for Local Community</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Browse Books</a></li>
+                        <li><a href="#">Donate Books</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>email@liboo.com</p>
+                    <p>+123 456 7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Liboo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

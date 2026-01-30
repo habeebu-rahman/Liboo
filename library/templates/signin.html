@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %} sign-in {% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='signin.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Matangi:wght@300..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Header -->
+    <header class="classic-header">
+        <div class="container">
+            <h1 class="logo"><a href="/" class='link'>Liboo</a></h1>
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li><a class='link' href="/">Home</a></li>
+                    <li><a class='link' href="/user_dash/search_book">Books</a></li>
+                    <li><a class='link' href="/user_dash/book_donation">Donate</a></li>
+                    <li><a class='link' href="/aboutus">About</a></li>
+                    <li><a class='link' href="#Contact">Contact</a></li>
+                    {% else %}
+                    <li><a class='link' href="#">Home</a></li>
+                    <li><a class='link' href="/aboutus">About</a></li>
+                    <li><a class='link' href="#Contact">Contact</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Registration Section -->
+    <section class="registration-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Create Your Account</h2>
+                <div class="divider"></div>
+            </div>
+        
+            <form class="registration-form" action="#" method="POST">
+
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name" >
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" >
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" >
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" >
+                </div>
+                <div class="form-group">
+                    <label for="location">Location / City / Pincode (optional)</label>
+                    <input type="text" id="location" name="location">
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn primary">Register</button>
+                    <button type="reset" class="btn secondary">Reset</button>
+                </div>
+            </form>
+            <div class="extra-links">
+                <p>Already have an account? <a class='link' href="/login">Login here</a></p>
+            </div>
+            <div class="validation-messages">
+                <p class="success-message" style="display: none;">Registration successful! Please check your email.</p>
+                <p class="error-message" style="display: none;">Error: Email already exists or passwords do not match.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="classic-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Liboo</h3>
+                    <p>The Open Library for Local Community</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a class='link' href="/">Home</a></li>
+                        <li><a class='link' href="/user_dash/search_book">Browse Books</a></li>
+                        <li><a class='link' href="/user_dash/book_donation">Donate Books</a></li>
+                        <li><a class='link' href="/aboutus">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact <a name='Contact'></a></h3>
+                    <p><a class='link' href="mailto:email@liboo.com">email@liboo.com</a></p>
+                    <p><a class='link' href="tel:+123 456 7890">+123 456 7890</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Liboo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

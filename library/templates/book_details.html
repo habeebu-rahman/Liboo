@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liboo - Book Detail</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='book_details.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="classic-header">
+        <div class="container">
+            <h1 class="logo"><a href="/" class='link'>Liboo</a></h1>
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li><a class='link' href="/">Home</a></li>
+                    <li><a class='link' href="/user_dash/search_book">Books</a></li>
+                    <li><a class='link' href="/user_dash/book_donation">Donate</a></li>
+                    <li><a class='link' href="/aboutus">About</a></li>
+                    <li><a class='link' href="#Contact">Contact</a></li>
+                    {% else %}
+                    <li><a class='link' href="#">Home</a></li>
+                    <li><a class='link' href="/aboutus">About</a></li>
+                    <li><a class='link' href="#Contact">Contact</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Book Detail Section -->
+    <section class="book-detail-section">
+        <div class="container">
+            <div class="book-header">
+                <div class="book-cover"> <img class="book-cover" src="{{ url_for('static', filename='uploads/' ~ book.cover_image) }}" alt="{{ book.book_name }}"></div>
+                <div class="book-info">
+                    <h2>{{book.book_name|title}}</h2>
+                    <p>Author: {{book.author_name|title}}</p>
+                    <p>Category: {{book.category}}</p>
+                </div>
+            </div>
+
+            <div class="book-description">
+                <h3>Description / Summary</h3>
+                <p>{{book.description}}</p>
+                <p>Published Year: {{book.published_year}}</p>
+                <!-- <p>Publisher: Example Publisher</p> -->
+                <p>ISBN: {{book.id}}</p>
+            </div>
+
+            <div class="donor-details">
+                <h3>Donor / Owner Details</h3>
+                <p>{{donor.name|title}}</p>
+                <p>{{book.location}}</p>
+                <p>{{book.date}}</p>
+            </div>
+
+            <div class="availability-status">
+                <form class="request-form" action="{{ url_for('auth.book_details', book_id=book.id) }}" method="POST">
+                    <h3>Availability Status</h3>
+                    <p id="status">Available</p>
+                    
+                    <button type="submit" class="btn request">Request Book</button>
+                </form>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn wishlist">Add to Wishlist</button>
+                <a href="/user_dash/search_book"><button class="btn back">Back to All Books</button></a>
+            </div>
+
+            <!-- Extra Features -->
+            <div class="extra-features">
+                <h3>User Ratings / Reviews</h3>
+                <p>Rating: ★★★★☆ (4/5)</p>
+                <h3>Related Books</h3>
+                <p><a href="#">Another Book by John Doe</a></p>
+                <p><a href="#">Similar Genre Book</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="classic-footer">
+    <div class="container">
+        <div class="footer-content">
+        <div class="footer-section">
+            <h3>Liboo</h3>
+            <p>The Open Library for Local Community</p>
+        </div>
+        <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a class='link' href="/">Home</a></li>
+                        <li><a class='link' href="/user_dash/search_book">Browse Books</a></li>
+                        <li><a class='link' href="/user_dash/book_donation">Donate Books</a></li>
+                        <li><a class='link' href="/aboutus">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact <a name='Contact'></a></h3>
+                    <p><a class='link' href="mailto:email@liboo.com">email@liboo.com</a></p>
+                    <p><a class='link' href="tel:+123 456 7890">+123 456 7890</a></p>
+                </div>
+        </div>
+        <div class="footer-bottom">
+        <p>&copy; 2025 Liboo. All rights reserved.</p>
+        </div>
+    </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.querySelectorAll('.request-form').forEach(form => {
+            const submitHandler = event => {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Request Book...',
+                    text: 'Are You Sure To Request The Book',
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes ',
+                    cancelButtonText: 'No ',
+                    confirmButtonColor: '#e6d5b3',
+                    cancelButtonColor: '#ffe4c4',
+                    background:'rgb(243 243 243)',
+                    customClass: {
+                    confirmButton: 'custom-confirm',
+                    cancelButton: 'custom-cancel'
+                    }
+                }).then(result => {
+                    if (result.isConfirmed) {
+                    // 2. Temporarily remove the listener
+                    form.removeEventListener('submit', submitHandler);
+                    
+                    // 3. Submit the form (this will now bypass the listener)
+                    form.submit();
+                    }
+                });
+            };
+            // 4. Attach the defined handler
+            form.addEventListener('submit', submitHandler);
+        });
+    </script>
+</body>
+</html>
