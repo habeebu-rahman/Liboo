@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head> <title>{% block title %} Home {% endblock %}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liboo - Open Community Library</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='home1.css') }}">
+    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home1.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Matangi:wght@300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Matangi:wght@300..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header with Navigation -->
@@ -32,6 +34,7 @@
         </div>
     </header>
 
+    {% block content %}
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -122,6 +125,7 @@
             </div>
         </div>
     </section>
+    {% endblock content %}
 
     <!-- Footer -->
     <footer class="classic-footer">
