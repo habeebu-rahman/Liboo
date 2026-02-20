@@ -1,40 +1,16 @@
+{% extends 'index.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Liboo - Donate a Book</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='book_donate.css') }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+
+  <title>{% block title %}Liboo - Donate a Book{% endblock title %}</title>
+  {% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/book_donate.css') }}">
+  {% endblock %}
 </head>
 <body>
-  <!-- Header -->
-  <header class="classic-header">
-    <div class="container">
-        <h1 class="logo"><a href="/" class='link'>Liboo</a></h1>
-      <nav>
-        <ul>
-          {% if user.is_authenticated %}
-                    <li><a class='link' href="/">Home</a></li>
-                    <li><a class='link' href="/user_dash/search_book">Books</a></li>
-                    <li><a class='link' href="/user_dash/book_donation">Donate</a></li>
-                    <li><a class='link' href="/aboutus">About</a></li>
-                    <li><a class='link' href="#Contact">Contact</a></li>
-                    {% else %}
-                    <li><a class='link' href="#">Home</a></li>
-                    <li><a class='link' href="/aboutus">About</a></li>
-                    <li><a class='link' href="#Contact">Contact</a></li>
-                    {% endif %}
-        </ul>
-      </nav>
-    </div>
-  </header>
 
+  {% block content %}
   <!-- Donation Section -->
   <section class="donation-section">
     <div class="container">
@@ -112,35 +88,7 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="classic-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Liboo</h3>
-          <p>The Open Library for Local Community</p>
-        </div>
-        <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a class='link' href="/">Home</a></li>
-                        <li><a class='link' href="/user_dash/search_book">Browse Books</a></li>
-                        <li><a class='link' href="/user_dash/book_donation">Donate Books</a></li>
-                        <li><a class='link' href="/aboutus">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact <a name='Contact'></a></h3>
-                    <p><a class='link' href="mailto:email@liboo.com">email@liboo.com</a></p>
-                    <p><a class='link' href="tel:+123 456 7890">+123 456 7890</a></p>
-                </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Liboo. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+  
 
 <script>
     const form = document.getElementById('donation-form');
@@ -206,5 +154,6 @@
       previewCover.style.backgroundImage = 'none';
     });
   </script>
+  {% endblock content %}
 </body>
 </html>

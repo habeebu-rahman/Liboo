@@ -1,37 +1,16 @@
+{% extends 'index.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liboo - Explore All Books</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='search_book.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <title>{% block title %}Liboo - Explore All Books{% endblock title %}</title>
+    {% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_book.css') }}">
+    {% endblock %}
 </head>
 <body>
-    <!-- Header -->
-    <header class="classic-header">
-        <div class="container">
-            <h1 class="logo"><a href="/" class='link'>Liboo</a></h1>
-            <nav>
-                <ul>
-                    {% if user.is_authenticated %}
-                    <li><a class='link' href="/">Home</a></li>
-                    <li><a class='link' href="/user_dash/search_book">Books</a></li>
-                    <li><a class='link' href="/user_dash/book_donation">Donate</a></li>
-                    <li><a class='link' href="/aboutus">About</a></li>
-                    <li><a class='link' href="#Contact">Contact</a></li>
-                    {% else %}
-                    <li><a class='link' href="#">Home</a></li>
-                    <li><a class='link' href="/aboutus">About</a></li>
-                    <li><a class='link' href="#Contact">Contact</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
-    </header>
 
+    {% block content %}
     <!-- Explore All Books Section -->
     <section class="explore-books-section">
         <div class="container">
@@ -112,34 +91,7 @@
             </div>
         </div>
     </section>
+    {% endblock content %}
 
-    <!-- Footer -->
-    <footer class="classic-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Liboo</h3>
-                    <p>The Open Library for Local Community</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#">Browse Books</a></li>
-                        <li><a href="#">Donate Books</a></li>
-                        <li><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p>email@liboo.com</p>
-                    <p>+123 456 7890</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Liboo. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

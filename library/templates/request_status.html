@@ -1,31 +1,16 @@
+{% extends 'index.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liboo - My Book Requests</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='requast_status.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <title>{% block title %}Liboo - My Book Requests{% endblock title %}</title>
+    {% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/requast_status.css') }}">
+    {% endblock %}
 </head>
 <body>
-    <!-- Header -->
-    <header class="classic-header">
-        <div class="container">
-            <h1 class="logo"><a href="/" class='link'>Liboo</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Books</a></li>
-                    <li><a href="#">Donate</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
+    {% block content %}
     <!-- Request Status Section -->
     <section class="request-status-section">
         <div class="container">
@@ -95,34 +80,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="classic-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Liboo</h3>
-                    <p>The Open Library for Local Community</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#">Browse Books</a></li>
-                        <li><a href="#">Donate Books</a></li>
-                        <li><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p>email@liboo.com</p>
-                    <p>+123 456 7890</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Liboo. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
         function showTab(tabName) {
@@ -139,5 +96,6 @@
             event.target.classList.add('active');
         }
     </script>
+    {% endblock content %}
 </body>
 </html>

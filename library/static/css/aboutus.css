@@ -7,7 +7,7 @@
 }
 
 .about-section h2 {
-    font-family: 'Cormorant Garamond', serif;
+    /* font-family: 'Cormorant Garamond', serif; */
     font-weight: 700;
     margin-bottom: 2rem;
     color: var(--primary-gray);
@@ -33,10 +33,11 @@
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
 }
 
 .section h3 {
-    font-family: 'Cormorant Garamond', serif;
+    /* font-family: 'Cormorant Garamond', serif; */
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--primary-gray);
